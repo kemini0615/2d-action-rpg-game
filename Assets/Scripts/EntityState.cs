@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class EntityState
+public abstract class EntityState
 {
+    // 모든 상태는 플레이어를 참조한다.
+    protected Player player;
+
     // 모든 상태는 상태 머신을 참조한다.
-    protected StateMachine StateMachine { get; private set; }
+    protected StateMachine stateMachine;
 
-    private string stateName;
+    protected string stateName;
 
-    public EntityState(StateMachine stateMachine, string stateName)
+    public EntityState(Player player, StateMachine stateMachine, string stateName)
     {
-        StateMachine = stateMachine;
+        this.player = player;
+        this.stateMachine = stateMachine;
         this.stateName = stateName;
     }
 
