@@ -18,7 +18,7 @@ public class PlayerIdleState : EntityState
         base.Update();
 
         // 상태 트랜지션(Idle -> Move) 발생.
-        if (player.MoveDirection != Vector2.zero)
+        if (player.MoveDirection.x != 0)
         {
             stateMachine.ChangeState(player.MoveState);
         }

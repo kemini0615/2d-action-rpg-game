@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Rigidbody2D Rigidbody { get; private set; }
+    public Animator Animator { get; private set; }
+
     // 플레이어를 위해 생성한 입력 시스템(InputActions)를 갖는다.
     private PlayerInputActions inputActions;
 
     public Vector2 MoveDirection { get; private set; } // 플레이어의 이동 방향.
+    public float moveSpeed; // 플레이어의 이동 속력.
 
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
@@ -14,15 +18,16 @@ public class Player : MonoBehaviour
     public PlayerIdleState IdleState { get; private set;} // 정지 상태.
     public PlayerMoveState MoveState { get; private set;} // 이동 상태.
 
-    public Animator Animator { get; private set; }
-
     void Awake()
     {
+        Rigidbody = GetComponent<Rigidbody2D>();
+        Animator = GetComponentInChildren<Animator>();
+
         inputActions = new PlayerInputActions();
+
         stateMachine = new StateMachine();
         IdleState = new PlayerIdleState(this, stateMachine, "idle");
         MoveState = new PlayerMoveState(this, stateMachine, "move");
-        Animator = GetComponentInChildren<Animator>();
     }
 
     void OnEnable()
@@ -53,5 +58,11 @@ public class Player : MonoBehaviour
     void OnDisable()
     {
         inputActions.Disable(); // 입력 시스템 비활성화.
+    }
+
+    // 플레이어의 속도를 설정한다.
+    public void SetVelocity(float x, float y)
+    {
+        Rigidbody.linearVelocity = new Vector2(x, y);
     }
 }
