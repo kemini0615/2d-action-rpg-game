@@ -14,12 +14,15 @@ public class Player : MonoBehaviour
     public PlayerIdleState IdleState { get; private set;} // 정지 상태.
     public PlayerMoveState MoveState { get; private set;} // 이동 상태.
 
+    public Animator Animator { get; private set; }
+
     void Awake()
     {
         inputActions = new PlayerInputActions();
         stateMachine = new StateMachine();
-        IdleState = new PlayerIdleState(this, stateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, stateMachine, "Move");
+        IdleState = new PlayerIdleState(this, stateMachine, "idle");
+        MoveState = new PlayerMoveState(this, stateMachine, "move");
+        Animator = GetComponentInChildren<Animator>();
     }
 
     void OnEnable()

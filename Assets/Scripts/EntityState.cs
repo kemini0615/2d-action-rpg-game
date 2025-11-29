@@ -8,6 +8,7 @@ public abstract class EntityState
     // 모든 상태는 상태 머신을 참조한다.
     protected StateMachine stateMachine;
 
+    // 애니메이션의 트랜지션을 위한 파라미터로 사용된다.
     protected string stateName;
 
     public EntityState(Player player, StateMachine stateMachine, string stateName)
@@ -21,6 +22,8 @@ public abstract class EntityState
     public virtual void Enter()
     {
         Debug.Log(this.stateName + " Enter.");
+
+        player.Animator.SetBool(this.stateName, true); // 애니메이션 재생 시작.
     }
 
     // 상태가 유지될 때 호출된다.
@@ -33,5 +36,7 @@ public abstract class EntityState
     public virtual void Exit()
     {
         Debug.Log(this.stateName + " Exit.");
+
+        player.Animator.SetBool(this.stateName, false); // 애니메이션 재생 종료.
     }
 }
