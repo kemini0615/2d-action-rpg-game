@@ -1,6 +1,5 @@
-using UnityEngine;
-
-public class PlayerMoveState : EntityState
+// Move 상태는 Ground 상태의 자식
+public class PlayerMoveState : PlayerGroundState
 {
     public PlayerMoveState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) {}
 
@@ -15,7 +14,7 @@ public class PlayerMoveState : EntityState
     {
         base.Update();
 
-        // 상태 트랜지션(Move -> Idle) 발생.
+        // Idle 상태로 트랜지션.
         if (player.MoveDirection.x == 0)
         {
             stateMachine.ChangeState(player.IdleState);

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public abstract class EntityState
 {
     // 모든 상태는 플레이어를 참조한다.
@@ -21,22 +19,18 @@ public abstract class EntityState
     // 상태가 시작될 때 호출된다.
     public virtual void Enter()
     {
-        Debug.Log(this.stateName + " Enter.");
-
         player.Animator.SetBool(this.stateName, true); // 애니메이션 재생 시작.
     }
 
     // 상태가 유지될 때 호출된다.
     public virtual void Update()
     {
-        Debug.Log(this.stateName + " Update.");
+        player.Animator.SetFloat("yVelocity", player.Rigidbody.linearVelocity.y);
     }
 
     // 상태가 종료될 때 호출된다.
     public virtual void Exit()
     {
-        Debug.Log(this.stateName + " Exit.");
-
         player.Animator.SetBool(this.stateName, false); // 애니메이션 재생 종료.
     }
 }

@@ -1,6 +1,5 @@
-using UnityEngine;
-
-public class PlayerIdleState : EntityState
+// Idle 상태는 Ground 상태의 자식
+public class PlayerIdleState : PlayerGroundState
 {
     // 부모 클래스의 생성자에 매개변수가 존재하는 경우, 'base()'가 필수적이다.
     // 부모 클래스의 생성자가 매개변수가 없는 기본 생성자의 경우, 'base()'는 생략 가능하다.
@@ -10,6 +9,9 @@ public class PlayerIdleState : EntityState
     public override void Enter()
     {
         base.Enter();
+
+        // 정지 상태가 시작될 때 플레이어를 정지.
+        player.Move(0f, 0f);
     }
 
     // 상태가 유지될 때 호출된다.
@@ -17,7 +19,7 @@ public class PlayerIdleState : EntityState
     {
         base.Update();
 
-        // 상태 트랜지션(Idle -> Move) 발생.
+        // Move 상태로 트랜지션.
         if (player.MoveDirection.x != 0)
         {
             stateMachine.ChangeState(player.MoveState);
