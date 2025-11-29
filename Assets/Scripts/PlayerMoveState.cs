@@ -16,7 +16,7 @@ public class PlayerMoveState : EntityState
         base.Update();
 
         // 상태 트랜지션(Move -> Idle) 발생.
-        if (Input.GetKeyDown(KeyCode.F))
+        if (player.MoveDirection == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }
