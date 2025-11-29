@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public Vector2 MoveDirection { get; private set; } // 플레이어의 이동 방향.
     public float moveSpeed; // 플레이어의 이동 속력.
+    private bool facingRight = true; // 플레이어가 바라보는 방향.
 
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
@@ -60,9 +61,20 @@ public class Player : MonoBehaviour
         inputActions.Disable(); // 입력 시스템 비활성화.
     }
 
-    // 플레이어의 속도를 설정한다.
-    public void SetVelocity(float x, float y)
+    // 플레이어의 이동을 결정한다.
+    public void Move(float xVelocity, float yVelocity)
     {
-        Rigidbody.linearVelocity = new Vector2(x, y);
+        Rigidbody.linearVelocity = new Vector2(xVelocity, yVelocity);
+        Flip(xVelocity);
+    }
+
+    // 플레이어의 이동 방향과 바라보는 방향에 따라서 이미지를 좌우반전한다.
+    private void Flip(float xVelocity)
+    {
+        if ((xVelocity > 0 && !facingRight) || (xVelocity < 0 && facingRight))
+        {
+            transform.Rotate(0, 180, 0);
+            facingRight = !facingRight;
+        }
     }
 }
