@@ -17,4 +17,9 @@ public class StateMachine
         CurrentState = newState; // 상태 변경.
         CurrentState.Enter(); // 변경 후 상태 시작.
     }
+
+    public void Play()
+    {
+        CurrentState.Update();
+    }
 }

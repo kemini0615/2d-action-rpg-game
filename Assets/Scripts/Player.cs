@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // 상태 머신의 현재 상태 유지.
-        stateMachine.CurrentState.Update();
+        stateMachine.Play();
     }
 
     void OnDisable()
