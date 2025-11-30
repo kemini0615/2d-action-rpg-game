@@ -10,7 +10,7 @@ public class PlayerIdleState : PlayerGroundState
     {
         base.Enter();
 
-        // 정지 상태가 시작될 때 플레이어를 정지.
+        // Idle 상태가 시작될 때 플레이어를 정지.
         player.Move(0f, 0f);
     }
 

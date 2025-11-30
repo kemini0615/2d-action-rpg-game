@@ -37,7 +37,10 @@ public abstract class EntityState
         // Dash 상태로 트랜지션.
         if (player.InputActions.Player.Dash.WasPressedThisFrame())
         {
-            stateMachine.ChangeState(player.DashState);
+            if (!player.OnWall && (stateMachine.CurrentState != player.DashState))
+            {
+                stateMachine.ChangeState(player.DashState);
+            }
         }
     }
 
