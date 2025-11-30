@@ -20,7 +20,7 @@ public class PlayerGroundState : EntityState
         }
 
         // Fall 상태로 트랜지션
-        if (player.Rigidbody.linearVelocity.y < 0)
+        if (player.Rigidbody.linearVelocity.y < 0 && !player.OnGround)
         {
             stateMachine.ChangeState(player.FallState);
         }

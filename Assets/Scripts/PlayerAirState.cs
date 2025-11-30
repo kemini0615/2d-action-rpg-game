@@ -14,7 +14,6 @@ public class PlayerAirState : EntityState
         base.Update();
 
         player.Move(player.MoveDirection.x * player.moveSpeed, player.Rigidbody.linearVelocity.y);
-
     }
 
     public override void Exit()

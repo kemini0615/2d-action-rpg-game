@@ -16,6 +16,12 @@ public class PlayerFallState : PlayerAirState
         {
             stateMachine.ChangeState(player.IdleState);
         }
+
+        // Slide 상태로 트랜지션.
+        if (player.OnWall)
+        {
+            stateMachine.ChangeState(player.WallSlideState);
+        }
     }
 
     public override void Exit()
