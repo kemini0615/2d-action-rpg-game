@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class EntityState
 {
     // 모든 상태는 플레이어를 참조한다.
@@ -8,6 +10,9 @@ public abstract class EntityState
 
     // 애니메이션의 트랜지션을 위한 파라미터로 사용된다.
     protected string stateName;
+
+    // 모든 상태는 타이머를 갖는다.
+    protected float timer;
 
     public EntityState(Player player, StateMachine stateMachine, string stateName)
     {
@@ -25,7 +30,15 @@ public abstract class EntityState
     // 상태가 유지될 때 호출된다.
     public virtual void Update()
     {
+        timer -= Time.deltaTime; // 타이머 시간 감소.
+
         player.Animator.SetFloat("yVelocity", player.Rigidbody.linearVelocity.y);
+
+        // Dash 상태로 트랜지션.
+        if (player.InputActions.Player.Dash.WasPressedThisFrame())
+        {
+            stateMachine.ChangeState(player.DashState);
+        }
     }
 
     // 상태가 종료될 때 호출된다.

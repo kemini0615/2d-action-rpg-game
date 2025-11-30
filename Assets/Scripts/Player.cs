@@ -10,12 +10,14 @@ public class Player : MonoBehaviour
 
     public Vector2 MoveDirection { get; private set; } // 플레이어의 이동 방향.
     public float moveSpeed; // 플레이어의 이동 속력.
+    public float dashSpeed; // 플레이어 대시 속력.
     public float jumpForce; // 플레이어의 점프 힘(Y축, 수직축).
     public float wallJumpForce; // 플레이어의 벽점프 힘(X축, 수평축).
     [Range(0, 1)]
     public float wallSlideFallMultiplier = 0.3f; // 플레이어의 벽타기 낙하 계수.
     private bool facingRight = true; // 플레이어가 바라보는 방향.
     public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
+    public float DashDuration { get; private set; } = 0.25f; // 플레이어 대시 시간.
 
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
     public PlayerFallState FallState { get; private set; } // 낙하 상태.
     public PlayerWallSlideState WallSlideState { get; private set; } // 벽타기 상태.
     public PlayerWallJumpState WallJumpState { get; private set; } // 벽점프 상태.
+    public PlayerDashState DashState { get; private set; } // 대시 상태.
 
     [SerializeField] private float distanceToGround = 1.5f;
     [SerializeField] private LayerMask groundLayer;
@@ -49,6 +52,7 @@ public class Player : MonoBehaviour
         FallState = new PlayerFallState(this, stateMachine, "air");
         WallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
         WallJumpState = new PlayerWallJumpState(this, stateMachine, "air");
+        DashState = new PlayerDashState(this, stateMachine, "dash");
     }
 
     void OnEnable()

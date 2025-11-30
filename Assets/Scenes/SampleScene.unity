@@ -884,6 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  dashSpeed: 30
   jumpForce: 15
   wallJumpForce: 10
   wallSlideFallMultiplier: 0.3
