@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
     public float DashDuration { get; private set; } = 0.25f; // 플레이어 대시 시간.
 
+    // ** OPTIONAL **
+    public float movingAttackSpeed; // 플레이어가 공격하면서 움직이는 속력.
+    public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
+
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
 
@@ -30,6 +34,7 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState WallSlideState { get; private set; } // 벽타기 상태.
     public PlayerWallJumpState WallJumpState { get; private set; } // 벽점프 상태.
     public PlayerDashState DashState { get; private set; } // 대시 상태.
+    public PlayerAttackState AttackState { get; private set; } // 공격 상태.
 
     [SerializeField] private float distanceToGround = 1.5f;
     [SerializeField] private LayerMask groundLayer;
@@ -53,6 +58,7 @@ public class Player : MonoBehaviour
         WallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
         WallJumpState = new PlayerWallJumpState(this, stateMachine, "air");
         DashState = new PlayerDashState(this, stateMachine, "dash");
+        AttackState = new PlayerAttackState(this, stateMachine, "attack");
     }
 
     void OnEnable()

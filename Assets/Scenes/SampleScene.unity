@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 1947967317}
   - component: {fileID: 1947967319}
   - component: {fileID: 1947967318}
+  - component: {fileID: 1947967320}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -852,6 +853,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1947967320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947967316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8282a839503f3a8408b97a3600fcbf9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2141094279
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +901,7 @@ MonoBehaviour:
   jumpForce: 15
   wallJumpForce: 10
   wallSlideFallMultiplier: 0.3
+  movingAttackSpeed: 10
   distanceToGround: 1.5
   groundLayer:
     serializedVersion: 2

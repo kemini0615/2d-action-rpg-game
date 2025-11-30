@@ -14,6 +14,8 @@ public abstract class EntityState
     // 모든 상태는 타이머를 갖는다.
     protected float timer;
 
+    public bool AnimationEventTriggered { get; private set;} = false;
+
     public EntityState(Player player, StateMachine stateMachine, string stateName)
     {
         this.player = player;
@@ -25,6 +27,8 @@ public abstract class EntityState
     public virtual void Enter()
     {
         player.Animator.SetBool(this.stateName, true); // 애니메이션 재생 시작.
+
+        SetAnimationEventTriggered(false); // 애니메이션 이벤트 발생 플래그 초기화.
     }
 
     // 상태가 유지될 때 호출된다.
@@ -48,5 +52,10 @@ public abstract class EntityState
     public virtual void Exit()
     {
         player.Animator.SetBool(this.stateName, false); // 애니메이션 재생 종료.
+    }
+
+    public void SetAnimationEventTriggered(bool value)
+    {
+        AnimationEventTriggered = value;
     }
 }

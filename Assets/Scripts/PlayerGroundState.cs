@@ -24,6 +24,12 @@ public class PlayerGroundState : EntityState
         {
             stateMachine.ChangeState(player.FallState);
         }
+
+        // Attack 상태로 트랜지션.
+        if (player.InputActions.Player.Attack.WasPressedThisFrame())
+        {
+            stateMachine.ChangeState(player.AttackState);
+        }
     }
 
     public override void Exit()
