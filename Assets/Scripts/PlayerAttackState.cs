@@ -2,11 +2,22 @@ using UnityEngine;
 
 public class PlayerAttackState : EntityState
 {
+    private int comboIndex = 0;
+    private float lastAttackTime = 0f;
+
     public PlayerAttackState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) {}
 
     public override void Enter()
     {
         base.Enter();
+
+        // 콤보 공격 시간이 지나면 첫번째 공격으로 리셋.
+        if (lastAttackTime + player.ComboDuration < Time.time)
+        {
+            comboIndex = 0;
+        }
+
+        player.Animator.SetInteger("comboIndex", comboIndex % 3);
 
         timer = player.MovingAttackDuration;
     }
@@ -32,5 +43,13 @@ public class PlayerAttackState : EntityState
             stateMachine.ChangeState(player.IdleState);
             SetAnimationEventTriggered(false);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        comboIndex++;
+        lastAttackTime = Time.time;
     }
 }

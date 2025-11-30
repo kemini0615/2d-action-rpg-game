@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     // ** OPTIONAL **
     public float movingAttackSpeed; // 플레이어가 공격하면서 움직이는 속력.
     public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
+    public float ComboDuration { get; private set; } = 1f;
 
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
