@@ -31,5 +31,11 @@ public class PlayerWallSlideState : EntityState
         {
             stateMachine.ChangeState(player.FallState);
         }
+
+        // WallJump 상태로 트랜지션.
+        if (player.InputActions.Player.Jump.WasPressedThisFrame())
+        {
+            stateMachine.ChangeState(player.WallJumpState);
+        }
     }
 }

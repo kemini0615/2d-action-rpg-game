@@ -10,11 +10,12 @@ public class Player : MonoBehaviour
 
     public Vector2 MoveDirection { get; private set; } // 플레이어의 이동 방향.
     public float moveSpeed; // 플레이어의 이동 속력.
-    public float jumpForce; // 플레이어의 점프 힘.
+    public float jumpForce; // 플레이어의 점프 힘(Y축, 수직축).
+    public float wallJumpForce; // 플레이어의 벽점프 힘(X축, 수평축).
     [Range(0, 1)]
     public float wallSlideFallMultiplier = 0.3f; // 플레이어의 벽타기 낙하 계수.
     private bool facingRight = true; // 플레이어가 바라보는 방향.
-    private int facingDirection = 1; // 플레이어가 바라보는 방향(정수).
+    public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
 
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; } // 점프 상태.
     public PlayerFallState FallState { get; private set; } // 낙하 상태.
     public PlayerWallSlideState WallSlideState { get; private set; } // 벽타기 상태.
+    public PlayerWallJumpState WallJumpState { get; private set; } // 벽점프 상태.
 
     [SerializeField] private float distanceToGround = 1.5f;
     [SerializeField] private LayerMask groundLayer;
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, stateMachine, "air");
         FallState = new PlayerFallState(this, stateMachine, "air");
         WallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
+        WallJumpState = new PlayerWallJumpState(this, stateMachine, "air");
     }
 
     void OnEnable()
@@ -83,7 +86,7 @@ public class Player : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * distanceToGround);
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * distanceToWall * facingDirection);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * distanceToWall * FacingDirection);
     }
 
     // 플레이어의 이동을 결정한다.
@@ -102,12 +105,12 @@ public class Player : MonoBehaviour
     {
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
-        facingDirection = -facingDirection;
+        FacingDirection = -FacingDirection;
     }
 
     private void RaycastGround()
     {
         OnGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
-        OnWall = Physics2D.Raycast(transform.position, Vector2.right * facingDirection, distanceToWall, groundLayer);
+        OnWall = Physics2D.Raycast(transform.position, Vector2.right * FacingDirection, distanceToWall, groundLayer);
     }
 }
