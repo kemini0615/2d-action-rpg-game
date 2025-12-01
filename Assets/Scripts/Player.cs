@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -22,7 +23,10 @@ public class Player : MonoBehaviour
     // ** OPTIONAL **
     public float movingAttackSpeed; // 플레이어가 공격하면서 움직이는 속력.
     public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
-    public float ComboDuration { get; private set; } = 1f;
+    public float ComboDuration { get; private set; } = 2f;
+
+    // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
+    private Coroutine coroutine;
 
     // 플레이어는 자신의 상태 머신을 갖는다.
     private StateMachine stateMachine;
@@ -123,5 +127,22 @@ public class Player : MonoBehaviour
     {
         OnGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
         OnWall = Physics2D.Raycast(transform.position, Vector2.right * FacingDirection, distanceToWall, groundLayer);
+    }
+
+    // 코루틴 함수.
+    private IEnumerator ComboAttackCoroutine()
+    {
+        yield return new WaitForEndOfFrame(); // 현재 프레임이 끝날 때까지 기다린다.
+        stateMachine.ChangeState(AttackState);
+    }
+
+    // 컴포넌트(Monobehaviour 클래스)가 아니면 코루틴을 실행할 수 없기 때문에 래핑한다.
+    public void ComboAttack()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(ComboAttackCoroutine());
     }
 }
