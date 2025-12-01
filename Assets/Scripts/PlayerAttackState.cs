@@ -16,15 +16,16 @@ public class PlayerAttackState : EntityState
         
         comboIndex %= ComboCount;
         
-        // 콤보 공격 시간이 지나면 첫번째 공격으로 리셋.
+        // 콤보 가능 시간이 지나면 첫번째 콤보 공격으로 리셋.
         if (lastAttackTime + player.ComboDuration < Time.time)
         {
             comboIndex = 0;
         }
 
-        player.Animator.SetInteger("comboIndex", comboIndex);
-        nextComboAttackQueued = false;
+        player.Animator.SetInteger("comboIndex", comboIndex); // 콤보 공격 애니메이션 설정.
+        nextComboAttackQueued = false; // 연속 콤보 공격 플래그 초기화.
         
+        // 공격 방향 설정.
         if (player.MoveDirection.x != 0)
         {
             attackDirection = (int)player.MoveDirection.x;
@@ -34,7 +35,7 @@ public class PlayerAttackState : EntityState
             attackDirection = player.FacingDirection;
         }
 
-        timer = player.MovingAttackDuration;
+        timer = player.MovingAttackDuration; // 플레이어가 움직이면서 공격하는 시간 설정.
     }
 
     public override void Update()
@@ -43,7 +44,7 @@ public class PlayerAttackState : EntityState
 
         if (timer >= 0)
         {
-            // 움직이면서 공격 가능.
+            // 설정한 공격 방향으로 움직이면서 공격.
             player.Move(player.movingAttackSpeed * attackDirection, player.Rigidbody.linearVelocity.y);
         }
         else
@@ -52,7 +53,7 @@ public class PlayerAttackState : EntityState
             player.Move(0f, player.Rigidbody.linearVelocity.y);
         }
 
-        // 세번째 마지막 공격 이후에는 콤보 공격 불가능.
+        // 세번째 콤보 공격 이후에는 연속 콤보 공격 불가능.
         if (player.InputActions.Player.Attack.WasPressedThisFrame() && comboIndex < ComboCount - 1)
         {
             nextComboAttackQueued = true;
@@ -62,7 +63,7 @@ public class PlayerAttackState : EntityState
         {
             if (nextComboAttackQueued)
             {
-                // 다음 Attack 상태로 트랜지션.
+                // 연속 콤보 공격: 다음 Attack 상태로 트랜지션.
                 player.Animator.SetBool(stateName, false);
                 player.ComboAttack(); // 프레임이 끝난 다음에 Attack 상태로 트랜지션.
             }

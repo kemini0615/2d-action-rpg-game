@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     // ** OPTIONAL **
     public float movingAttackSpeed; // 플레이어가 공격하면서 움직이는 속력.
     public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
-    public float ComboDuration { get; private set; } = 2f;
+    public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
 
     // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
     private Coroutine coroutine;
