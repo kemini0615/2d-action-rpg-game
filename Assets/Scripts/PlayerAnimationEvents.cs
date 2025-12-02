@@ -13,4 +13,9 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         player.AttackState.SetAnimationEventTriggered(true);
     }
+
+    public void OnJumpAttackFinished()
+    {
+        player.JumpAttackState.SetAnimationEventTriggered(true);
+    }
 }

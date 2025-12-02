@@ -27,7 +27,7 @@ public class PlayerAttackState : EntityState
         
         attackDirection = player.MoveDirection.x != 0 ? (int)player.MoveDirection.x : player.FacingDirection; // 공격 방향 설정.
 
-        timer = player.MovingAttackDuration; // 플레이어가 움직이면서 공격하는 시간 설정.
+        timer = player.AttackMovingDuration; // 플레이어가 움직이면서 공격하는 시간 설정.
     }
 
     public override void Update()
@@ -35,7 +35,7 @@ public class PlayerAttackState : EntityState
         base.Update();
 
         if (timer >= 0)
-            player.Move(player.MovingAttackSpeed * attackDirection, player.Rigidbody.linearVelocity.y); // 설정한 공격 방향으로 움직이면서 공격.
+            player.Move(player.AttackMovingSpeed * attackDirection, player.Rigidbody.linearVelocity.y); // 설정한 공격 방향으로 움직이면서 공격.
         else
             player.Move(0f, player.Rigidbody.linearVelocity.y); // 정지.
 

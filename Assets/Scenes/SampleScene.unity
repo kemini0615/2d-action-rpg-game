@@ -247,8 +247,8 @@ Transform:
   m_GameObject: {fileID: 441170465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.63, y: -0.02, z: 0}
-  m_LocalScale: {x: 5, y: 10, z: 1}
+  m_LocalPosition: {x: -6.68, y: -0.95, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -902,8 +902,10 @@ MonoBehaviour:
   <JumpForce>k__BackingField: 15
   <WallJumpForce>k__BackingField: 10
   <WallSlideFallMultiplier>k__BackingField: 0.3
-  <MovingAttackSpeed>k__BackingField: 5
-  <MovingAttackDuration>k__BackingField: 0.1
+  <AttackMovingSpeed>k__BackingField: 5
+  <AttackMovingDuration>k__BackingField: 0.1
+  <JumpAttackMovingVelocity>k__BackingField: {x: 5, y: -5}
+  <JumpAttackMovingDuration>k__BackingField: 0.1
   <ComboDuration>k__BackingField: 2
   distanceToGround: 1.5
   groundLayer:

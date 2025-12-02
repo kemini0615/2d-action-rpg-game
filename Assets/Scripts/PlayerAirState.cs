@@ -13,7 +13,10 @@ public class PlayerAirState : EntityState
     {
         base.Update();
 
-        player.Move(player.MoveDirection.x * player.moveSpeed, player.Rigidbody.linearVelocity.y);
+        player.Move(player.MoveDirection.x * player.MoveSpeed, player.Rigidbody.linearVelocity.y);
+
+        if (player.InputActions.Player.Attack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.JumpAttackState); // JumpAttack 상태로 트랜지션.
     }
 
     public override void Exit()

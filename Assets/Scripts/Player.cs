@@ -21,8 +21,10 @@ public class Player : MonoBehaviour
     public float DashDuration { get; private set; } = 0.25f; // 플레이어 대시 시간.
 
     // ** OPTIONAL **
-    [field: SerializeField] public float MovingAttackSpeed { get; private set; } = 5f; // 플레이어가 공격하면서 움직이는 속력.
-    [field: SerializeField] public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
+    [field: SerializeField] public float AttackMovingSpeed { get; private set; } = 5f; // 플레이어가 공격하면서 움직이는 속력.
+    [field: SerializeField] public float AttackMovingDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
+    [field: SerializeField] public Vector2 JumpAttackMovingVelocity { get; private set; } = new Vector2(5f, -5f); // 플레이어가 점프 공격하면서 움직이는 속도.
+    [field: SerializeField] public float JumpAttackMovingDuration { get; private set; } = 0.1f; // 플레이어가 점프 공격하면서 움직일 수 있는 시간.
     [field: SerializeField] public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
 
     // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
     public PlayerWallJumpState WallJumpState { get; private set; } // 벽점프 상태.
     public PlayerDashState DashState { get; private set; } // 대시 상태.
     public PlayerAttackState AttackState { get; private set; } // 공격 상태.
+    public PlayerJumpAttackState JumpAttackState { get; private set; } // 점프 공격 상태.
 
     [SerializeField] private float distanceToGround = 1.5f;
     [SerializeField] private LayerMask groundLayer;
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour
         WallJumpState = new PlayerWallJumpState(this, stateMachine, "air");
         DashState = new PlayerDashState(this, stateMachine, "dash");
         AttackState = new PlayerAttackState(this, stateMachine, "attack");
+        JumpAttackState = new PlayerJumpAttackState(this, stateMachine, "jumpAttack");
     }
 
     void OnEnable()
