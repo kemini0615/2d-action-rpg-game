@@ -10,18 +10,18 @@ public class Player : MonoBehaviour
     public PlayerInputActions InputActions { get; private set; }
 
     public Vector2 MoveDirection { get; private set; } // 플레이어의 이동 방향.
-    public float moveSpeed; // 플레이어의 이동 속력.
-    public float dashSpeed; // 플레이어 대시 속력.
-    public float jumpForce; // 플레이어의 점프 힘(Y축, 수직축).
-    public float wallJumpForce; // 플레이어의 벽점프 힘(X축, 수평축).
+    public float MoveSpeed { get; private set; } // 플레이어의 이동 속력.
+    public float DashSpeed { get; private set; } // 플레이어 대시 속력.
+    public float JumpForce { get; private set; } // 플레이어의 점프 힘(Y축, 수직축).
+    public float WallJumpForce { get; private set; } // 플레이어의 벽점프 힘(X축, 수평축).
     [Range(0, 1)]
-    public float wallSlideFallMultiplier = 0.3f; // 플레이어의 벽타기 낙하 계수.
+    public float WallSlideFallMultiplier { get; private set; } = 0.3f; // 플레이어의 벽타기 낙하 계수.
     private bool facingRight = true; // 플레이어가 바라보는 방향.
     public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
     public float DashDuration { get; private set; } = 0.25f; // 플레이어 대시 시간.
 
     // ** OPTIONAL **
-    public float movingAttackSpeed; // 플레이어가 공격하면서 움직이는 속력.
+    public float MovingAttackSpeed { get; private set; } // 플레이어가 공격하면서 움직이는 속력.
     public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
     public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
 

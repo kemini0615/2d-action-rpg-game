@@ -6,7 +6,7 @@ public class PlayerJumpState : PlayerAirState
     {
         base.Enter();
 
-        player.Move(player.Rigidbody.linearVelocity.x, player.jumpForce);
+        player.Move(player.Rigidbody.linearVelocity.x, player.JumpForce);
     }
 
     public override void Update()

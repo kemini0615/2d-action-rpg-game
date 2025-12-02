@@ -22,7 +22,7 @@ public class PlayerDashState : EntityState
     {
         base.Update();
 
-        player.Move(player.FacingDirection * player.dashSpeed, 0f);
+        player.Move(player.FacingDirection * player.DashSpeed, 0f);
 
         if (timer < 0 || player.OnWall)
         {

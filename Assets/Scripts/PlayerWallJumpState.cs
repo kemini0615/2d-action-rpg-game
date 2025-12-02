@@ -8,7 +8,7 @@ public class PlayerWallJumpState : EntityState
     {
         base.Enter();
 
-        player.Move(player.wallJumpForce * -player.FacingDirection, player.jumpForce);
+        player.Move(player.WallJumpForce * -player.FacingDirection, player.JumpForce);
     }
 
     public override void Update()

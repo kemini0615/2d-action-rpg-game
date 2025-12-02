@@ -11,7 +11,7 @@ public class PlayerWallSlideState : EntityState
         if (player.MoveDirection.y < 0)
             player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y); // 벽타기 상태에서 아래키를 누르면 빠르게 내려가기.
         else
-            player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y * player.wallSlideFallMultiplier); // 벽타기 상태에서 아래키를 누르지 않으면 느리게 내려가기.
+            player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y * player.WallSlideFallMultiplier); // 벽타기 상태에서 아래키를 누르지 않으면 느리게 내려가기.
 
         if (player.OnGround)
         {

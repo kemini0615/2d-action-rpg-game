@@ -35,7 +35,7 @@ public class PlayerAttackState : EntityState
         base.Update();
 
         if (timer >= 0)
-            player.Move(player.movingAttackSpeed * attackDirection, player.Rigidbody.linearVelocity.y); // 설정한 공격 방향으로 움직이면서 공격.
+            player.Move(player.MovingAttackSpeed * attackDirection, player.Rigidbody.linearVelocity.y); // 설정한 공격 방향으로 움직이면서 공격.
         else
             player.Move(0f, player.Rigidbody.linearVelocity.y); // 정지.
 
