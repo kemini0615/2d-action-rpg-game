@@ -15,11 +15,8 @@ public class PlayerWallJumpState : EntityState
     {
         base.Update();
 
-        // Fall 상태로 트랜지션.
         if (player.Rigidbody.linearVelocity.y < 0)
-        {
-            stateMachine.ChangeState(player.FallState);
-        }
+            stateMachine.ChangeState(player.FallState); // Fall 상태로 트랜지션.
     }
 
 }

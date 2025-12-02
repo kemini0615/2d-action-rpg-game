@@ -13,23 +13,14 @@ public class PlayerGroundState : EntityState
     {
         base.Update();
 
-        // Jump 상태로 트랜지션.
         if (player.InputActions.Player.Jump.WasPressedThisFrame())
-        {
-            stateMachine.ChangeState(player.JumpState);
-        }
-
-        // Fall 상태로 트랜지션
+            stateMachine.ChangeState(player.JumpState); // Jump 상태로 트랜지션.
+        
         if (player.Rigidbody.linearVelocity.y < 0 && !player.OnGround)
-        {
-            stateMachine.ChangeState(player.FallState);
-        }
+            stateMachine.ChangeState(player.FallState); // Fall 상태로 트랜지션.
 
-        // Attack 상태로 트랜지션.
         if (player.InputActions.Player.Attack.WasPressedThisFrame())
-        {
-            stateMachine.ChangeState(player.AttackState);
-        }
+            stateMachine.ChangeState(player.AttackState); // Attack 상태로 트랜지션.
     }
 
     public override void Exit()

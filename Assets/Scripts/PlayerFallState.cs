@@ -11,17 +11,11 @@ public class PlayerFallState : PlayerAirState
     {
         base.Update();
 
-        // Idle 상태로 트랜지션.
         if (player.OnGround)
-        {
-            stateMachine.ChangeState(player.IdleState);
-        }
+            stateMachine.ChangeState(player.IdleState); // Idle 상태로 트랜지션.
 
-        // WallSlide 상태로 트랜지션.
         if (player.OnWall)
-        {
-            stateMachine.ChangeState(player.WallSlideState);
-        }
+            stateMachine.ChangeState(player.WallSlideState); // WallSlide 상태로 트랜지션.
     }
 
     public override void Exit()

@@ -43,21 +43,13 @@ public class PlayerAttackState : EntityState
         base.Update();
 
         if (timer >= 0)
-        {
-            // 설정한 공격 방향으로 움직이면서 공격.
-            player.Move(player.movingAttackSpeed * attackDirection, player.Rigidbody.linearVelocity.y);
-        }
+            player.Move(player.movingAttackSpeed * attackDirection, player.Rigidbody.linearVelocity.y); // 설정한 공격 방향으로 움직이면서 공격.
         else
-        {
-            // 정지.
-            player.Move(0f, player.Rigidbody.linearVelocity.y);
-        }
+            player.Move(0f, player.Rigidbody.linearVelocity.y); // 정지.
 
         // 세번째 콤보 공격 이후에는 연속 콤보 공격 불가능.
         if (player.InputActions.Player.Attack.WasPressedThisFrame() && comboIndex < ComboCount - 1)
-        {
             nextComboAttackQueued = true;
-        }
 
         if (AnimationEventTriggered)
         {

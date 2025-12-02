@@ -26,16 +26,10 @@ public class PlayerDashState : EntityState
 
         if (timer < 0 || player.OnWall)
         {
-            // Idle 상태로 트랜지션.
             if (player.OnGround)
-            {
-                stateMachine.ChangeState(player.IdleState);
-            }
-            // Fall 상태로 트랜지션.
+                stateMachine.ChangeState(player.IdleState); // Idle 상태로 트랜지션.
             else
-            {
-                stateMachine.ChangeState(player.FallState);
-            }
+                stateMachine.ChangeState(player.FallState); // Fall 상태로 트랜지션.
         }
     }
 

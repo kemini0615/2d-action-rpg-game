@@ -42,9 +42,7 @@ public abstract class EntityState
         if (player.InputActions.Player.Dash.WasPressedThisFrame())
         {
             if (!player.OnWall && (stateMachine.CurrentState != player.DashState))
-            {
                 stateMachine.ChangeState(player.DashState);
-            }
         }
     }
 

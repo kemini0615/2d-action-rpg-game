@@ -8,34 +8,21 @@ public class PlayerWallSlideState : EntityState
     {
         base.Update();
 
-        // 벽타기 상태에서 아래키를 누르면 빠르게 내려가기.
         if (player.MoveDirection.y < 0)
-        {
-            player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y);
-        }
-        // 벽타기 상태에서 아래키를 누르지 않으면 느리게 내려가기
+            player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y); // 벽타기 상태에서 아래키를 누르면 빠르게 내려가기.
         else
-        {
-            player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y * player.wallSlideFallMultiplier);
-        }
+            player.Move(player.MoveDirection.x, player.Rigidbody.linearVelocity.y * player.wallSlideFallMultiplier); // 벽타기 상태에서 아래키를 누르지 않으면 느리게 내려가기.
 
-        // Idle 상태로 트랜지션.
         if (player.OnGround)
         {
-            stateMachine.ChangeState(player.IdleState);
+            stateMachine.ChangeState(player.IdleState); // Idle 상태로 트랜지션.
             player.Flip();
         }
 
-        // Fall 상태로 트랜지션.
         if (!player.OnWall)
-        {
-            stateMachine.ChangeState(player.FallState);
-        }
+            stateMachine.ChangeState(player.FallState); // Fall 상태로 트랜지션.
 
-        // WallJump 상태로 트랜지션.
         if (player.InputActions.Player.Jump.WasPressedThisFrame())
-        {
-            stateMachine.ChangeState(player.WallJumpState);
-        }
+            stateMachine.ChangeState(player.WallJumpState); // WallJump 상태로 트랜지션.
     }
 }

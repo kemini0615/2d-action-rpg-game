@@ -110,9 +110,7 @@ public class Player : MonoBehaviour
         Rigidbody.linearVelocity = new Vector2(xVelocity, yVelocity);
 
         if ((xVelocity > 0 && !facingRight) || (xVelocity < 0 && facingRight))
-        {
             Flip();
-        }
     }
 
     // 플레이어 이미지를 좌우반전한다.
@@ -140,9 +138,8 @@ public class Player : MonoBehaviour
     public void ComboAttack()
     {
         if (coroutine != null)
-        {
             StopCoroutine(coroutine);
-        }
+
         coroutine = StartCoroutine(ComboAttackCoroutine());
     }
 }

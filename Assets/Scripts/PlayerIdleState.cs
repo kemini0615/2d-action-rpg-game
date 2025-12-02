@@ -19,11 +19,8 @@ public class PlayerIdleState : PlayerGroundState
     {
         base.Update();
 
-        // Move 상태로 트랜지션.
         if (player.MoveDirection.x != 0)
-        {
-            stateMachine.ChangeState(player.MoveState);
-        }
+            stateMachine.ChangeState(player.MoveState); // Move 상태로 트랜지션.
     }
 
     // 상태가 종료될 때 호출된다.

@@ -14,11 +14,8 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.Update();
 
-        // Idle 상태로 트랜지션.
         if (player.MoveDirection.x == 0)
-        {
-            stateMachine.ChangeState(player.IdleState);
-        }
+            stateMachine.ChangeState(player.IdleState); // Idle 상태로 트랜지션.
 
         // 플레이어를 움직인다.
         player.Move(player.MoveDirection.x * player.moveSpeed, player.Rigidbody.linearVelocity.y);
