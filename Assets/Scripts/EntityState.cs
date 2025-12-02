@@ -14,7 +14,7 @@ public abstract class EntityState
     // 모든 상태는 타이머를 갖는다.
     protected float timer;
 
-    public bool AnimationEventTriggered { get; private set;} = false;
+    public bool AnimationEventTriggered { get; private set; } = false;
 
     public EntityState(Player player, StateMachine stateMachine, string stateName)
     {

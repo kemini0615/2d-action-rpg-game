@@ -9,21 +9,21 @@ public class Player : MonoBehaviour
     // 플레이어를 위해 생성한 입력 시스템(InputActions)를 갖는다.
     public PlayerInputActions InputActions { get; private set; }
 
-    public Vector2 MoveDirection { get; private set; } // 플레이어의 이동 방향.
-    public float MoveSpeed { get; private set; } // 플레이어의 이동 속력.
-    public float DashSpeed { get; private set; } // 플레이어 대시 속력.
-    public float JumpForce { get; private set; } // 플레이어의 점프 힘(Y축, 수직축).
-    public float WallJumpForce { get; private set; } // 플레이어의 벽점프 힘(X축, 수평축).
+    [field: SerializeField] public Vector2 MoveDirection { get; private set; } = Vector2.zero; // 플레이어의 이동 방향.
+    [field: SerializeField] public float MoveSpeed { get; private set; } = 10f; // 플레이어의 이동 속력.
+    [field: SerializeField] public float DashSpeed { get; private set; } = 30f; // 플레이어 대시 속력.
+    [field: SerializeField] public float JumpForce { get; private set; } = 15f; // 플레이어의 점프 힘(Y축, 수직축).
+    [field: SerializeField] public float WallJumpForce { get; private set; } = 15f; // 플레이어의 벽점프 힘(X축, 수평축).
     [Range(0, 1)]
-    public float WallSlideFallMultiplier { get; private set; } = 0.3f; // 플레이어의 벽타기 낙하 계수.
+    [field: SerializeField] public float WallSlideFallMultiplier { get; private set; } = 0.3f; // 플레이어의 벽타기 낙하 계수.
     private bool facingRight = true; // 플레이어가 바라보는 방향.
     public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
     public float DashDuration { get; private set; } = 0.25f; // 플레이어 대시 시간.
 
     // ** OPTIONAL **
-    public float MovingAttackSpeed { get; private set; } // 플레이어가 공격하면서 움직이는 속력.
-    public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
-    public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
+    [field: SerializeField] public float MovingAttackSpeed { get; private set; } = 5f; // 플레이어가 공격하면서 움직이는 속력.
+    [field: SerializeField] public float MovingAttackDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
+    [field: SerializeField] public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
 
     // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
     private Coroutine coroutine;

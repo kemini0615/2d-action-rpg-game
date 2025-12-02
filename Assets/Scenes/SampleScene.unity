@@ -896,12 +896,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4390c4905e0c745b6aacd6373f9935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  dashSpeed: 30
-  jumpForce: 15
-  wallJumpForce: 10
-  wallSlideFallMultiplier: 0.3
-  movingAttackSpeed: 10
+  <MoveDirection>k__BackingField: {x: 0, y: 0}
+  <MoveSpeed>k__BackingField: 10
+  <DashSpeed>k__BackingField: 30
+  <JumpForce>k__BackingField: 15
+  <WallJumpForce>k__BackingField: 10
+  <WallSlideFallMultiplier>k__BackingField: 0.3
+  <MovingAttackSpeed>k__BackingField: 5
+  <MovingAttackDuration>k__BackingField: 0.1
+  <ComboDuration>k__BackingField: 2
   distanceToGround: 1.5
   groundLayer:
     serializedVersion: 2
@@ -916,7 +919,7 @@ Transform:
   m_GameObject: {fileID: 2141094279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.42, y: 0, z: 0}
+  m_LocalPosition: {x: -2.5, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
