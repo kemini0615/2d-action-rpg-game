@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     public bool OnGround { get; private set; } = true;
 
     [SerializeField] private float distanceToWall = 0.4f;
+    [SerializeField] private Transform highWallChecker;
+    [SerializeField] private Transform lowWallChecker;
     public bool OnWall { get; private set; } = true;
 
     void Awake()
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour
         // 상태 머신의 현재 상태 유지.
         stateMachine.Play();
 
-        RaycastGround();
+        Raycast();
     }
 
     void OnDisable()
@@ -105,7 +107,8 @@ public class Player : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * distanceToGround);
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * distanceToWall * FacingDirection);
+        Gizmos.DrawLine(highWallChecker.position, highWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
+        Gizmos.DrawLine(lowWallChecker.position, lowWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
     }
 
     // 플레이어의 이동을 결정한다.
@@ -125,10 +128,11 @@ public class Player : MonoBehaviour
         FacingDirection = -FacingDirection;
     }
 
-    private void RaycastGround()
+    private void Raycast()
     {
         OnGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
-        OnWall = Physics2D.Raycast(transform.position, Vector2.right * FacingDirection, distanceToWall, groundLayer);
+        OnWall = Physics2D.Raycast(highWallChecker.position, Vector2.right * FacingDirection, distanceToWall, groundLayer)
+                    && Physics2D.Raycast(lowWallChecker.position, Vector2.right * FacingDirection, distanceToWall, groundLayer);
     }
 
     // 코루틴 함수.
