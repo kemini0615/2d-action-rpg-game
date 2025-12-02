@@ -5,7 +5,7 @@ public class PlayerAttackState : EntityState
     private const int ComboCount = 3;
     private int comboIndex = 0;
     private float lastAttackTime = 0f;
-    private bool nextComboAttackQueued = false;
+    private bool nextComboAttackPressed = false;
     private int attackDirection;
 
     public PlayerAttackState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) {}
@@ -23,17 +23,9 @@ public class PlayerAttackState : EntityState
         }
 
         player.Animator.SetInteger("comboIndex", comboIndex); // 콤보 공격 애니메이션 설정.
-        nextComboAttackQueued = false; // 연속 콤보 공격 플래그 초기화.
+        nextComboAttackPressed = false; // 연속 콤보 공격 플래그 초기화.
         
-        // 공격 방향 설정.
-        if (player.MoveDirection.x != 0)
-        {
-            attackDirection = (int)player.MoveDirection.x;
-        }
-        else
-        {
-            attackDirection = player.FacingDirection;
-        }
+        attackDirection = player.MoveDirection.x != 0 ? (int)player.MoveDirection.x : player.FacingDirection; // 공격 방향 설정.
 
         timer = player.MovingAttackDuration; // 플레이어가 움직이면서 공격하는 시간 설정.
     }
@@ -49,23 +41,11 @@ public class PlayerAttackState : EntityState
 
         // 세번째 콤보 공격 이후에는 연속 콤보 공격 불가능.
         if (player.InputActions.Player.Attack.WasPressedThisFrame() && comboIndex < ComboCount - 1)
-            nextComboAttackQueued = true;
+            nextComboAttackPressed = true;
 
         if (AnimationEventTriggered)
         {
-            if (nextComboAttackQueued)
-            {
-                // 연속 콤보 공격: 다음 Attack 상태로 트랜지션.
-                player.Animator.SetBool(stateName, false);
-                player.ComboAttack(); // 프레임이 끝난 다음에 Attack 상태로 트랜지션.
-            }
-            else
-            {
-                // Idle 상태로 트랜지션.
-                stateMachine.ChangeState(player.IdleState);
-            }
-
-            SetAnimationEventTriggered(false);
+            HandleNextAttackState();
         }
     }
 
@@ -75,5 +55,20 @@ public class PlayerAttackState : EntityState
 
         comboIndex++;
         lastAttackTime = Time.time;
+    }
+
+    private void HandleNextAttackState()
+    {
+        if (nextComboAttackPressed)
+        {
+            player.Animator.SetBool(stateName, false);
+            player.ComboAttack(); // 프레임이 끝난 다음에 Attack 상태로 트랜지션.
+        }
+        else
+        {
+            stateMachine.ChangeState(player.IdleState); // Idle 상태로 트랜지션.
+        }
+
+        SetAnimationEventTriggered(false);
     }
 }
