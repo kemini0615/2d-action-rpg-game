@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,7 +19,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public float WallSlideFallMultiplier { get; private set; } = 0.3f; // 플레이어의 벽타기 낙하 계수.
     private bool facingRight = true; // 플레이어가 바라보는 방향.
     public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
-    public float DashDuration { get; private set; } = 0.25f; // 플레이어 대시 시간.
+    public float DashDuration { get; private set; } = 0.2f; // 플레이어 대시 시간.
 
     // ** OPTIONAL **
     [field: SerializeField] public float AttackMovingSpeed { get; private set; } = 5f; // 플레이어가 공격하면서 움직이는 속력.
