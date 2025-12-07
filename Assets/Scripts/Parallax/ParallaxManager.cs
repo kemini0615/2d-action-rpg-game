@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ParallaxController : MonoBehaviour
+public class ParallaxManager : MonoBehaviour
 {
     [SerializeField] private ParallaxLayer[] layers;
 
