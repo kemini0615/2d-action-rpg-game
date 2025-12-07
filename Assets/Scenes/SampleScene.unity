@@ -338,7 +338,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5001416, y: 12.447586, z: 13.9878235}
+  m_LocalPosition: {x: -3.3798585, y: 2.7075865, z: 13.9878235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,7 +361,7 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 2
+  UpdateMethod: 1
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 0
@@ -575,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 639592904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5001416, y: 12.447586, z: 13.9878235}
+  m_LocalPosition: {x: -3.3798585, y: 2.7075865, z: 13.9878235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3487,9 +3487,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layers:
-  - parallaxMultiplier: 0.95
+  - parallaxMultiplier: 1
     layer: {fileID: 627950307}
-  - parallaxMultiplier: 0.7
+  - parallaxMultiplier: 0.85
     layer: {fileID: 1778424290}
 --- !u!1 &1778424288
 GameObject:
@@ -3806,7 +3806,7 @@ Transform:
   m_GameObject: {fileID: 2141094279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.92, y: 7.64, z: 0}
+  m_LocalPosition: {x: -5.8, y: -2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
