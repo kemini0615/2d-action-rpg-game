@@ -2,23 +2,16 @@ using UnityEngine;
 
 public abstract class EntityState
 {
-    // 모든 상태는 플레이어를 참조한다.
-    protected Player player;
+    [field:SerializeField] protected Rigidbody2D Rigidbody { get; set; }
+    [field:SerializeField] protected Animator Animator { get; set; }
 
-    // 모든 상태는 상태 머신을 참조한다.
-    protected StateMachine stateMachine;
-
-    // 애니메이션의 트랜지션을 위한 파라미터로 사용된다.
-    protected string stateName;
-
-    // 모든 상태는 타이머를 갖는다.
-    protected float timer;
-
+    protected StateMachine stateMachine; // 모든 상태는 상태 머신을 참조한다.
+    protected string stateName; // 애니메이션의 트랜지션을 위한 파라미터로 사용된다.
+    protected float timer; // 모든 상태는 타이머를 갖는다.
     public bool AnimationEventTriggered { get; private set; } = false;
 
-    public EntityState(Player player, StateMachine stateMachine, string stateName)
+    public EntityState(StateMachine stateMachine, string stateName)
     {
-        this.player = player;
         this.stateMachine = stateMachine;
         this.stateName = stateName;
     }
@@ -26,7 +19,7 @@ public abstract class EntityState
     // 상태가 시작될 때 호출된다.
     public virtual void Enter()
     {
-        player.Animator.SetBool(this.stateName, true); // 애니메이션 재생 시작.
+        Animator.SetBool(this.stateName, true); // 애니메이션 재생 시작.
 
         SetAnimationEventTriggered(false); // 애니메이션 이벤트 발생 플래그 초기화.
     }
@@ -35,21 +28,12 @@ public abstract class EntityState
     public virtual void Update()
     {
         timer -= Time.deltaTime; // 타이머 시간 감소.
-
-        player.Animator.SetFloat("yVelocity", player.Rigidbody.linearVelocity.y);
-
-        // Dash 상태로 트랜지션.
-        if (player.InputActions.Player.Dash.WasPressedThisFrame())
-        {
-            if (!player.OnWall && (stateMachine.CurrentState != player.DashState))
-                stateMachine.ChangeState(player.DashState);
-        }
     }
 
     // 상태가 종료될 때 호출된다.
     public virtual void Exit()
     {
-        player.Animator.SetBool(this.stateName, false); // 애니메이션 재생 종료.
+        Animator.SetBool(this.stateName, false); // 애니메이션 재생 종료.
     }
 
     public void SetAnimationEventTriggered(bool value)

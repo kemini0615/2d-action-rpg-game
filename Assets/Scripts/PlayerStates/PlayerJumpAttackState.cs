@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerJumpAttackState : EntityState
+public class PlayerJumpAttackState : PlayerState
 {
     public PlayerJumpAttackState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) {}
     private bool hasLanded;

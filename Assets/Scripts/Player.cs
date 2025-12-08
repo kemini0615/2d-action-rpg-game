@@ -1,38 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    public Rigidbody2D Rigidbody { get; private set; }
-    public Animator Animator { get; private set; }
-
     // 플레이어를 위해 생성한 입력 시스템(InputActions)를 갖는다.
     public PlayerInputActions InputActions { get; private set; }
-
-    [field: SerializeField] public Vector2 MoveDirection { get; private set; } = Vector2.zero; // 플레이어의 이동 방향.
-    [field: SerializeField] public float MoveSpeed { get; private set; } = 10f; // 플레이어의 이동 속력.
-    [field: SerializeField] public float DashSpeed { get; private set; } = 30f; // 플레이어 대시 속력.
-    [field: SerializeField] public float JumpForce { get; private set; } = 15f; // 플레이어의 점프 힘(Y축, 수직축).
-    [field: SerializeField] public float WallJumpForce { get; private set; } = 15f; // 플레이어의 벽점프 힘(X축, 수평축).
-    [Range(0, 1)]
-    [field: SerializeField] public float WallSlideFallMultiplier { get; private set; } = 0.3f; // 플레이어의 벽타기 낙하 계수.
-    private bool facingRight = true; // 플레이어가 바라보는 방향.
-    public int FacingDirection { get; private set; } = 1; // 플레이어가 바라보는 방향(+1, -1).
-    public float DashDuration { get; private set; } = 0.2f; // 플레이어 대시 시간.
-
-    // ** OPTIONAL **
-    [field: SerializeField] public float AttackMovingSpeed { get; private set; } = 5f; // 플레이어가 공격하면서 움직이는 속력.
-    [field: SerializeField] public float AttackMovingDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
-    [field: SerializeField] public Vector2 JumpAttackMovingVelocity { get; private set; } = new Vector2(5f, -5f); // 플레이어가 점프 공격하면서 움직이는 속도.
-    [field: SerializeField] public float JumpAttackMovingDuration { get; private set; } = 0.1f; // 플레이어가 점프 공격하면서 움직일 수 있는 시간.
-    [field: SerializeField] public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
-
-    // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
-    private Coroutine coroutine;
-
-    // 플레이어는 자신의 상태 머신을 갖는다.
-    private StateMachine stateMachine;
 
     // 플레이어는 상태 머신의 현재 상태를 설정하기 위해서 자신의 다양한 상태를 갖는다.
     public PlayerIdleState IdleState { get; private set;} // 정지 상태.
@@ -45,23 +17,29 @@ public class Player : MonoBehaviour
     public PlayerAttackState AttackState { get; private set; } // 공격 상태.
     public PlayerJumpAttackState JumpAttackState { get; private set; } // 점프 공격 상태.
 
-    [SerializeField] private float distanceToGround = 1.5f;
-    [SerializeField] private LayerMask groundLayer;
-    public bool OnGround { get; private set; } = true;
+    [field: SerializeField] public Vector2 MoveDirection { get; private set; } = Vector2.zero; // 플레이어의 이동 방향.
+    [field: SerializeField] public float MoveSpeed { get; private set; } = 10f; // 플레이어의 이동 속력.
+    [field: SerializeField] public float DashSpeed { get; private set; } = 30f; // 플레이어 대시 속력.
+    [field: SerializeField] public float DashDuration { get; private set; } = 0.2f; // 플레이어 대시 시간.
+    [field: SerializeField] public float JumpForce { get; private set; } = 15f; // 플레이어의 점프 힘(Y축, 수직축).
+    [field: SerializeField] public float WallJumpForce { get; private set; } = 15f; // 플레이어의 벽점프 힘(X축, 수평축).
+    [Range(0, 1)][field: SerializeField] public float WallSlideFallMultiplier { get; private set; } = 0.3f; // 플레이어의 벽타기 낙하 계수.
 
-    [SerializeField] private float distanceToWall = 0.4f;
-    [SerializeField] private Transform highWallChecker;
-    [SerializeField] private Transform lowWallChecker;
-    public bool OnWall { get; private set; } = true;
+    [field: SerializeField] public float AttackMovingSpeed { get; private set; } = 5f; // 플레이어가 공격하면서 움직이는 속력.
+    [field: SerializeField] public float AttackMovingDuration { get; private set; } = 0.1f; // 플레이어가 공격하면서 움직일 수 있는 시간.
+    [field: SerializeField] public Vector2 JumpAttackMovingVelocity { get; private set; } = new Vector2(5f, -5f); // 플레이어가 점프 공격하면서 움직이는 속도.
+    [field: SerializeField] public float JumpAttackMovingDuration { get; private set; } = 0.1f; // 플레이어가 점프 공격하면서 움직일 수 있는 시간.
+    [field: SerializeField] public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
 
-    void Awake()
+    // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
+    private Coroutine coroutine;
+
+    protected override void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
-        Animator = GetComponentInChildren<Animator>();
+        base.Awake();
 
         InputActions = new PlayerInputActions();
 
-        stateMachine = new StateMachine();
         IdleState = new PlayerIdleState(this, stateMachine, "idle");
         MoveState = new PlayerMoveState(this, stateMachine, "move");
         JumpState = new PlayerJumpState(this, stateMachine, "air");
@@ -73,67 +51,12 @@ public class Player : MonoBehaviour
         JumpAttackState = new PlayerJumpAttackState(this, stateMachine, "jumpAttack");
     }
 
-    void OnEnable()
+    protected override void Start()
     {
-        InputActions.Enable(); // 입력 시스템 활성화.
+        base.Start();
 
-        // Player: 액션 맵 이름.
-        // Move: 액션 이름.
-        // started: 입력 시작 이벤트.
-        // performed: 입력 유지 이벤트.
-        // canceled: 입력 종료 이벤트.
-        InputActions.Player.Move.performed += context => MoveDirection = context.ReadValue<Vector2>(); // started 이벤트에 구독하면 대각선 이동이 제대로 구현되지 않는다.
-        InputActions.Player.Move.canceled += context => MoveDirection = Vector2.zero;
-    }
-
-    void Start()
-    {
         // 상태 머신 초기화.
         stateMachine.Initialize(IdleState);
-    }
-
-    void Update()
-    {
-        // 상태 머신의 현재 상태 유지.
-        stateMachine.Play();
-
-        Raycast();
-    }
-
-    void OnDisable()
-    {
-        InputActions.Disable(); // 입력 시스템 비활성화.
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * distanceToGround);
-        Gizmos.DrawLine(highWallChecker.position, highWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
-        Gizmos.DrawLine(lowWallChecker.position, lowWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
-    }
-
-    // 플레이어의 이동을 결정한다.
-    public void Move(float xVelocity, float yVelocity)
-    {
-        Rigidbody.linearVelocity = new Vector2(xVelocity, yVelocity);
-
-        if ((xVelocity > 0 && !facingRight) || (xVelocity < 0 && facingRight))
-            Flip();
-    }
-
-    // 플레이어 이미지를 좌우반전한다.
-    public void Flip()
-    {
-        transform.Rotate(0, 180, 0);
-        facingRight = !facingRight;
-        FacingDirection = -FacingDirection;
-    }
-
-    private void Raycast()
-    {
-        OnGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
-        OnWall = Physics2D.Raycast(highWallChecker.position, Vector2.right * FacingDirection, distanceToWall, groundLayer)
-                    && Physics2D.Raycast(lowWallChecker.position, Vector2.right * FacingDirection, distanceToWall, groundLayer);
     }
 
     // 코루틴 함수.
@@ -151,4 +74,23 @@ public class Player : MonoBehaviour
 
         coroutine = StartCoroutine(ComboAttackCoroutine());
     }
+
+    private void OnEnable()
+    {
+        InputActions.Enable(); // 입력 시스템 활성화.
+
+        // Player: 액션 맵 이름.
+        // Move: 액션 이름.
+        // started: 입력 시작 이벤트.
+        // performed: 입력 유지 이벤트.
+        // canceled: 입력 종료 이벤트.
+        InputActions.Player.Move.performed += context => MoveDirection = context.ReadValue<Vector2>(); // started 이벤트에 구독하면 대각선 이동이 제대로 구현되지 않는다.
+        InputActions.Player.Move.canceled += context => MoveDirection = Vector2.zero;
+    }
+
+    private void OnDisable()
+    {
+        InputActions.Disable(); // 입력 시스템 비활성화.
+    }
+
 }

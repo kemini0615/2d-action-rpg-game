@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttackState : EntityState
+public class PlayerAttackState : PlayerState
 {
     private const int ComboCount = 3;
     private int comboIndex = 0;
