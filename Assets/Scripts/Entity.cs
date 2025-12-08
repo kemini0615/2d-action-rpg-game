@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour
     private bool facingRight = true; // 개체가 바라보는 방향.
     public int FacingDirection { get; private set; } = 1; // 개체가 바라보는 방향(+1, -1).
     
+    [SerializeField] private Transform groundChecker;
     [SerializeField] private float distanceToGround = 1.5f;
     [SerializeField] private LayerMask groundLayer;
     public bool OnGround { get; private set; } = true;
@@ -39,7 +40,7 @@ public class Entity : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * distanceToGround);
+        Gizmos.DrawLine(groundChecker.position, groundChecker.position + Vector3.down * distanceToGround);
         Gizmos.DrawLine(highWallChecker.position, highWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
         Gizmos.DrawLine(lowWallChecker.position, lowWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
     }
@@ -63,7 +64,7 @@ public class Entity : MonoBehaviour
 
     private void Raycast()
     {
-        OnGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
+        OnGround = Physics2D.Raycast(groundChecker.position, Vector2.down, distanceToGround, groundLayer);
         OnWall = Physics2D.Raycast(highWallChecker.position, Vector2.right * FacingDirection, distanceToWall, groundLayer)
                     && Physics2D.Raycast(lowWallChecker.position, Vector2.right * FacingDirection, distanceToWall, groundLayer);
     }
