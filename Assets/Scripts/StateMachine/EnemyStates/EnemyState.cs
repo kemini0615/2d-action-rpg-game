@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class EnemyState : EntityState
 {
     protected Enemy enemy;
@@ -12,6 +14,10 @@ public class EnemyState : EntityState
     public override void Update()
     {
         base.Update();
+
+        // TEMP
+        if (Input.GetKeyDown(KeyCode.F))
+            stateMachine.ChangeState(enemy.AttackState);
 
         Animator.SetFloat("moveAnimationSpeedMultiplier", enemy.MoveAnimationSpeedMultiplier);
     }

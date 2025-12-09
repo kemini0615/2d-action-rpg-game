@@ -8,6 +8,7 @@ public class Skeleton : Enemy
         
         IdleState = new EnemyIdleState(this, stateMachine, "idle");
         MoveState = new EnemyMoveState(this, stateMachine, "move");
+        AttackState = new EnemyAttackState(this, stateMachine, "attack");
     }
 
     protected override void Start()

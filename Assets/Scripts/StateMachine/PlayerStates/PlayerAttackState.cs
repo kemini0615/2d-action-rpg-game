@@ -44,9 +44,7 @@ public class PlayerAttackState : PlayerState
             nextComboAttackPressed = true;
 
         if (AnimationEventTriggered)
-        {
             HandleNextAttackState();
-        }
     }
 
     public override void Exit()

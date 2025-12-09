@@ -18,4 +18,9 @@ public class EnemyMoveState : EnemyState
             stateMachine.ChangeState(enemy.IdleState);
         }
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }
