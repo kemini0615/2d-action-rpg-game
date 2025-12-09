@@ -8,4 +8,11 @@ public class EnemyState : EntityState
         this.Animator = enemy.Animator;
         this.Rigidbody = enemy.Rigidbody;
     }
+
+    public override void Update()
+    {
+        base.Update();
+
+        Animator.SetFloat("moveAnimationSpeedMultiplier", enemy.MoveAnimationSpeedMultiplier);
+    }
 }

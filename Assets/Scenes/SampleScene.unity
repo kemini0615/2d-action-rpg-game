@@ -8251,7 +8251,8 @@ MonoBehaviour:
   highWallChecker: {fileID: 1335817442}
   lowWallChecker: {fileID: 1664410372}
   <IdleDuration>k__BackingField: 2
-  <MoveSpeed>k__BackingField: 3
+  <MoveSpeed>k__BackingField: 1.5
+  <MoveAnimationSpeedMultiplier>k__BackingField: 1
 --- !u!1 &1200376135
 GameObject:
   m_ObjectHideFlags: 0
