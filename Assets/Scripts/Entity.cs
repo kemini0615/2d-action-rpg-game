@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
     
     [SerializeField] private Transform groundChecker;
     [SerializeField] private float distanceToGround = 1.5f;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] protected LayerMask groundLayer;
     public bool OnGround { get; private set; } = true;
 
     [SerializeField] private float distanceToWall = 0.4f;
@@ -38,13 +38,6 @@ public class Entity : MonoBehaviour
         Raycast();
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(groundChecker.position, groundChecker.position + Vector3.down * distanceToGround);
-        Gizmos.DrawLine(highWallChecker.position, highWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
-        Gizmos.DrawLine(lowWallChecker.position, lowWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
-    }
-
     // 플레이어의 이동을 결정한다.
     public void Move(float xVelocity, float yVelocity)
     {
@@ -60,6 +53,13 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         FacingDirection = -FacingDirection;
+    }
+
+    protected virtual void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(groundChecker.position, groundChecker.position + Vector3.down * distanceToGround);
+        Gizmos.DrawLine(highWallChecker.position, highWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
+        Gizmos.DrawLine(lowWallChecker.position, lowWallChecker.position + Vector3.right * distanceToWall * FacingDirection);
     }
 
     private void Raycast()
