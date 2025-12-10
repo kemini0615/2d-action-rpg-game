@@ -13,13 +13,18 @@ public abstract class PlayerState : EntityState
     {
         base.Update();
 
-        player.Animator.SetFloat("yVelocity", Rigidbody.linearVelocity.y);
-
         // Dash 상태로 트랜지션.
         if (player.InputActions.Player.Dash.WasPressedThisFrame())
         {
             if (!player.OnWall && (stateMachine.CurrentState != player.DashState))
                 stateMachine.ChangeState(player.DashState);
         }
+    }
+
+    public override void UpdateAnimatorParameter()
+    {
+        base.UpdateAnimatorParameter();
+
+        Animator.SetFloat("yVelocity", Rigidbody.linearVelocity.y);
     }
 }

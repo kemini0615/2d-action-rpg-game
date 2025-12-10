@@ -11,14 +11,12 @@ public class EnemyState : EntityState
         this.Rigidbody = enemy.Rigidbody;
     }
 
-    public override void Update()
+    public override void UpdateAnimatorParameter()
     {
-        base.Update();
+        base.UpdateAnimatorParameter();
 
-        // TEMP
-        if (Input.GetKeyDown(KeyCode.F))
-            stateMachine.ChangeState(enemy.AttackState);
-
+        Animator.SetFloat("xVelocity", Rigidbody.linearVelocity.x);
         Animator.SetFloat("moveAnimationSpeedMultiplier", enemy.MoveAnimationSpeedMultiplier);
+        Animator.SetFloat("battleAnimationSpeedMultiplier", enemy.BattleMoveSpeed / enemy.MoveSpeed);
     }
 }

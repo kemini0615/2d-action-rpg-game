@@ -28,6 +28,7 @@ public abstract class EntityState
     public virtual void Update()
     {
         timer -= Time.deltaTime; // 타이머 시간 감소.
+        UpdateAnimatorParameter(); // 애니메이터 파라미터 갱신.
     }
 
     // 상태가 종료될 때 호출된다.
@@ -40,4 +41,6 @@ public abstract class EntityState
     {
         AnimationEventTriggered = value;
     }
+
+    public virtual void UpdateAnimatorParameter() {}
 }

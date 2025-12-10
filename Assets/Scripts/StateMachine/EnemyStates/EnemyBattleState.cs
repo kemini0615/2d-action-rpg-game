@@ -25,11 +25,6 @@ public class EnemyBattleState : EnemyState
         if (enemy.DetectPlayer())
             targetLastDetected = Time.time;
 
-        // 애니메이터 파라미터 설정.
-        float battleAnimationSpeedMultiplier = enemy.BattleMoveSpeed / enemy.MoveSpeed;
-        Animator.SetFloat("xVelocity", Rigidbody.linearVelocity.x);
-        Animator.SetFloat("battleAnimationSpeedMultiplier", battleAnimationSpeedMultiplier);
-
         if (TargetInAttackRange())
             stateMachine.ChangeState(enemy.AttackState); // 플레이어가 사거리 안에 있다면 Attack 상태로 트랜지션.
         else if (BattleIsOver())
