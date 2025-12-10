@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyBattleState : EnemyState
 {
     private Transform target;
+    private float targetLastDetected;
 
     public EnemyBattleState(Enemy enemy, StateMachine stateMachine, string stateName) : base(enemy, stateMachine, stateName) {}
 
@@ -12,20 +13,34 @@ public class EnemyBattleState : EnemyState
 
         if (target == null)
             target = enemy.DetectPlayer().transform;
+
+        if (ShouldRetreat())
+            enemy.Retreat(GetChaseDirection());
     }
 
     public override void Update()
     {
         base.Update();
 
+        if (enemy.DetectPlayer())
+            targetLastDetected = Time.time;
+
+        // 애니메이터 파라미터 설정.
+        float battleAnimationSpeedMultiplier = enemy.BattleMoveSpeed / enemy.MoveSpeed;
         Animator.SetFloat("xVelocity", Rigidbody.linearVelocity.x);
+        Animator.SetFloat("battleAnimationSpeedMultiplier", battleAnimationSpeedMultiplier);
 
         if (TargetInAttackRange())
-            stateMachine.ChangeState(enemy.AttackState);
+            stateMachine.ChangeState(enemy.AttackState); // 플레이어가 사거리 안에 있다면 Attack 상태로 트랜지션.
+        else if (BattleIsOver())
+            stateMachine.ChangeState(enemy.IdleState); // Battle 상태가 끝나면 Idle 상태로 트랜지션.
         else
-            enemy.Move(enemy.BattleMoveSpeed * GetBattleMoveDirection(), Rigidbody.linearVelocity.y);
+            enemy.Move(enemy.BattleMoveSpeed * GetChaseDirection(), Rigidbody.linearVelocity.y); // 그렇지 않다면 플레이어 추적.
     }
 
+
+
+    // 플레이어와의 거리 계산.
     private float GetDistanceToPlayer()
     {
         if (target == null)
@@ -34,9 +49,18 @@ public class EnemyBattleState : EnemyState
         return Mathf.Abs(target.position.x - enemy.transform.position.x);
     }
 
-    private bool TargetInAttackRange() => GetDistanceToPlayer() < enemy.AttackRange;
+    // 플레이어가 사거리 안에 있는지 확인.
+    private bool TargetInAttackRange() => enemy.DetectPlayer() && (GetDistanceToPlayer() < enemy.AttackRange);
 
-    private int GetBattleMoveDirection()
+    // Battle 상태 끝났는지 확인.
+    private bool BattleIsOver() => Time.time > targetLastDetected + enemy.BattleDuration;
+
+    // 뒤로 물러나야하는지 확인.
+    private bool ShouldRetreat() => GetDistanceToPlayer() < enemy.RetreatDistance;
+
+
+    // 배틀 상태에서 플레이어 추적 방향 계산.
+    private int GetChaseDirection()
     {
         if (target == null)
             return 0;

@@ -16,6 +16,6 @@ public class EnemyAttackState : EnemyState
         enemy.Move(0f, 0f);
 
         if (AnimationEventTriggered)
-            stateMachine.ChangeState(enemy.IdleState); // Idle 상태로 트랜지션.
+            stateMachine.ChangeState(enemy.BattleState); // Battle 상태로 트랜지션.
     }
 }

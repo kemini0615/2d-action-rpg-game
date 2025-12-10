@@ -8310,8 +8310,11 @@ MonoBehaviour:
   <IdleDuration>k__BackingField: 2
   <MoveSpeed>k__BackingField: 1.5
   <MoveAnimationSpeedMultiplier>k__BackingField: 1
+  <BattleDuration>k__BackingField: 5
   <BattleMoveSpeed>k__BackingField: 3
   <AttackRange>k__BackingField: 2
+  <RetreatDistance>k__BackingField: 1
+  <RetreatSpeed>k__BackingField: 10
   playerChecker: {fileID: 1073773642}
   playerLayer:
     serializedVersion: 2

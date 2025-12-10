@@ -9,10 +9,15 @@ public class Enemy : Entity
 
     [field: SerializeField] public float IdleDuration { get; private set; } = 2f; // 정지 상태 지속 시간.
     [field: SerializeField] public float MoveSpeed { get; private set; } = 1.5f; // 이동 속력.
-    [Range(0, 2)][field: SerializeField] public float MoveAnimationSpeedMultiplier { get; private set; } = 1f; // Move 애니메이션 재생 속도 계수.
+    [field: SerializeField] public float MoveAnimationSpeedMultiplier { get; private set; } = 1f; // Move 애니메이션 재생 속도 계수.
 
+    [field: SerializeField] public float BattleDuration { get; private set; } = 5f; // 배틀 상태 지속 시간.
     [field: SerializeField] public float BattleMoveSpeed { get; private set; } = 3f; // 배틀 상태 이동 속력.
     [field: SerializeField] public float AttackRange { get; private set; } = 2f; // 공격 사거리.
+
+    [field: SerializeField] public float RetreatDistance { get; private set; } = 1f;
+    [field: SerializeField] public float RetreatSpeed { get; private set; } = 5f;
+
 
     [SerializeField] private Transform playerChecker;
     [SerializeField] private LayerMask playerLayer;
@@ -26,6 +31,9 @@ public class Enemy : Entity
         Gizmos.DrawLine(playerChecker.position, playerChecker.position + Vector3.right * detectRange * FacingDirection);
         Gizmos.color = Color.red;
         Gizmos.DrawLine(playerChecker.position, playerChecker.position + Vector3.right * AttackRange * FacingDirection);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(playerChecker.position, playerChecker.position + Vector3.right * RetreatDistance * FacingDirection);
+
     }
 
     public RaycastHit2D DetectPlayer()
@@ -41,5 +49,11 @@ public class Enemy : Entity
             return default;
 
         return hit;
+    }
+
+    public void Retreat(float facingDirection)
+    {
+        Rigidbody.linearVelocity = new Vector2(RetreatSpeed * -FacingDirection, Rigidbody.linearVelocity.y);
+        HandleFlip(facingDirection);
     }
 }

@@ -43,7 +43,13 @@ public class Entity : MonoBehaviour
     {
         Rigidbody.linearVelocity = new Vector2(xVelocity, yVelocity);
 
-        if ((xVelocity > 0 && !facingRight) || (xVelocity < 0 && facingRight))
+        HandleFlip(xVelocity);
+    }
+
+    // 좌우반전을 결정한다.
+    public void HandleFlip(float facingDirection)
+    {
+        if ((facingDirection > 0 && !facingRight) || (facingDirection < 0 && facingRight))
             Flip();
     }
 
