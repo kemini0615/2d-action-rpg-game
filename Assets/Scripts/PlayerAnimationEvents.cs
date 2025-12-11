@@ -3,10 +3,17 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     private Player player;
+    private Combat combat;
 
     void Awake()
     {
         player = GetComponentInParent<Player>();
+        combat = GetComponentInParent<Combat>();
+    }
+
+    public void OnAttack()
+    {
+        combat.PerformAttack();
     }
 
     public void OnAttackFinished()

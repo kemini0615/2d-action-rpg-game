@@ -8195,6 +8195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1073773642}
   - component: {fileID: 1073773645}
+  - component: {fileID: 1073773646}
   - component: {fileID: 1073773644}
   - component: {fileID: 1073773643}
   m_Layer: 8
@@ -8221,6 +8222,7 @@ Transform:
   - {fileID: 1664410372}
   - {fileID: 1335817442}
   - {fileID: 364370959}
+  - {fileID: 1549671985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1073773643
@@ -8320,6 +8322,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   detectRange: 10
+--- !u!114 &1073773646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073773640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69716f3f856f96499c3a99cceded208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColliders: []
+  targetChecker: {fileID: 1549671985}
+  targetCheckerRadius: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1200376135
 GameObject:
   m_ObjectHideFlags: 0
@@ -14887,6 +14907,37 @@ MonoBehaviour:
     layer: {fileID: 627950307}
   - parallaxMultiplier: 0.85
     layer: {fileID: 1778424290}
+--- !u!1 &1549671984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1549671985}
+  m_Layer: 7
+  m_Name: TargetChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1549671985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549671984}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: -0.25, z: 0}
+  m_LocalScale: {x: 0.7692308, y: 0.7692308, z: 0.7692308}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1073773642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664410371
 GameObject:
   m_ObjectHideFlags: 0
@@ -14917,6 +14968,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073773642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1737884297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1737884298}
+  m_Layer: 7
+  m_Name: TargetChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1737884298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737884297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.25, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2141094281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1778424288
 GameObject:
@@ -15186,6 +15268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141094281}
   - component: {fileID: 2141094280}
+  - component: {fileID: 2141094284}
   - component: {fileID: 2141094282}
   - component: {fileID: 2141094283}
   m_Layer: 7
@@ -15244,6 +15327,7 @@ Transform:
   - {fileID: 1200376136}
   - {fileID: 2146425025}
   - {fileID: 677599805}
+  - {fileID: 1737884298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2141094282
@@ -15310,6 +15394,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.3}
   m_Size: {x: 0.8, y: 2}
   m_Direction: 0
+--- !u!114 &2141094284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141094279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69716f3f856f96499c3a99cceded208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColliders: []
+  targetChecker: {fileID: 1737884298}
+  targetCheckerRadius: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2146425024
 GameObject:
   m_ObjectHideFlags: 0
