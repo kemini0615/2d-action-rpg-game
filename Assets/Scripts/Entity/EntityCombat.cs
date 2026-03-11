@@ -6,6 +6,9 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private float targetCheckerRadius = 1f;
     [SerializeField] private LayerMask targetLayer;
 
+    // TEMP
+    [SerializeField] private float damage = 1f;
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(targetChecker.position, targetCheckerRadius);
@@ -22,7 +25,8 @@ public class EntityCombat : MonoBehaviour
 
         foreach (Collider2D targetCollider in targetColliders)
         {
-            Debug.Log("Attack: " + targetCollider.name);
+            EntityHealth targetHealth = targetCollider.GetComponent<EntityHealth>();
+            targetHealth?.TakeDamage(damage);
         }
     }
 }
