@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class EntityState
+public abstract class BaseState
 {
     [field:SerializeField] protected Rigidbody2D Rigidbody { get; set; }
     [field:SerializeField] protected Animator Animator { get; set; }
@@ -10,7 +10,7 @@ public abstract class EntityState
     protected float timer; // 모든 상태는 타이머를 갖는다.
     public bool AnimationEventTriggered { get; private set; } = false;
 
-    public EntityState(StateMachine stateMachine, string stateName)
+    public BaseState(StateMachine stateMachine, string stateName)
     {
         this.stateMachine = stateMachine;
         this.stateName = stateName;

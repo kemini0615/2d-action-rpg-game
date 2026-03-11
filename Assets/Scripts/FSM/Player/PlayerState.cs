@@ -1,4 +1,4 @@
-public abstract class PlayerState : EntityState
+public abstract class PlayerState : BaseState
 {
     protected Player player;
 

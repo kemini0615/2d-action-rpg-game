@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     private Player player;
-    private Combat combat;
+    private EntityCombat combat;
 
     void Awake()
     {
         player = GetComponentInParent<Player>();
-        combat = GetComponentInParent<Combat>();
+        combat = GetComponentInParent<EntityCombat>();
     }
 
     public void OnAttack()

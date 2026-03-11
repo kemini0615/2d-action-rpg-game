@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyState : EntityState
+public class EnemyState : BaseState
 {
     protected Enemy enemy;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Combat : MonoBehaviour
+public class EntityCombat : MonoBehaviour
 {
     [SerializeField] private Transform targetChecker;
     [SerializeField] private float targetCheckerRadius = 1f;
