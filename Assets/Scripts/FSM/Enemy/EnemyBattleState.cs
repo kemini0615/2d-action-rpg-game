@@ -12,7 +12,7 @@ public class EnemyBattleState : EnemyState
         base.Enter();
 
         if (target == null)
-            target = enemy.DetectPlayer().transform;
+            target = enemy.GetPlayer();
 
         if (ShouldRetreat())
             enemy.Retreat(GetChaseDirection());

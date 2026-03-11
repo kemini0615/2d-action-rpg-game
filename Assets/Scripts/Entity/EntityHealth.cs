@@ -5,7 +5,7 @@ public class EntityHealth : MonoBehaviour
     [SerializeField] protected float currentHp = 100f;
     [SerializeField] protected bool isDead = false;
 
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, Transform attacker)
     {
         if (isDead)
             return;

@@ -18,7 +18,7 @@ public class Enemy : Entity
     [field: SerializeField] public float RetreatDistance { get; private set; } = 1f;
     [field: SerializeField] public float RetreatSpeed { get; private set; } = 5f;
 
-
+    private Transform player;
     [SerializeField] private Transform playerChecker;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float detectRange = 10f;
@@ -34,6 +34,23 @@ public class Enemy : Entity
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(playerChecker.position, playerChecker.position + Vector3.right * RetreatDistance * FacingDirection);
 
+    }
+
+    public void EnterBattleState(Transform player)
+    {
+        if (stateMachine.CurrentState == BattleState || stateMachine.CurrentState == AttackState)
+            return;
+
+        this.player = player;
+        stateMachine.ChangeState(BattleState);
+    }
+
+    public Transform GetPlayer()
+    {
+        if (player == null)
+            player = DetectPlayer().transform;
+
+        return player;
     }
 
     public RaycastHit2D DetectPlayer()

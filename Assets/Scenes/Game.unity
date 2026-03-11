@@ -373,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.60014164, y: 3.4775863, z: 13.9878235}
+  m_LocalPosition: {x: -10.6898575, y: 3.4775863, z: 13.9878235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -741,7 +741,7 @@ Transform:
   m_GameObject: {fileID: 639592904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.60014164, y: 3.4775863, z: 13.9878235}
+  m_LocalPosition: {x: -10.6898575, y: 3.4775863, z: 13.9878235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8235,7 +8235,7 @@ Transform:
   m_GameObject: {fileID: 1073773640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13, y: -1.5, z: 0}
+  m_LocalPosition: {x: -7.09, y: -1.5, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8370,9 +8370,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1073773640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9556d9a3d4ce2024ea4f040b62e70422, type: 3}
+  m_Script: {fileID: 11500000, guid: fdc55c1531157ec408622b90154e7b97, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EntityHealth
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentHp: 100
   isDead: 0
 --- !u!1 &1200376135
@@ -15321,7 +15321,7 @@ GameObject:
   - component: {fileID: 2141094283}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15367,7 +15367,7 @@ Transform:
   m_GameObject: {fileID: 2141094279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.82, y: -1.33, z: 0}
+  m_LocalPosition: {x: -13.11, y: -1.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
