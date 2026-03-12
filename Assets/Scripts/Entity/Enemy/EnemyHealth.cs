@@ -4,8 +4,9 @@ public class EnemyHealth : EntityHealth
 {
     private Enemy enemy;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         enemy = GetComponent<Enemy>();
     }
 
