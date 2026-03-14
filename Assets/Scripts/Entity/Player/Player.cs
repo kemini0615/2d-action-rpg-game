@@ -32,7 +32,7 @@ public class Player : Entity
     [field: SerializeField] public float ComboDuration { get; private set; } = 2f; // 콤보 가능 시간.
 
     // 코루틴 함수를 실행하면 반환되는 객체를 참조한다.
-    private Coroutine coroutine;
+    private Coroutine comboAttackCoroutine;
 
     protected override void Awake()
     {
@@ -60,7 +60,7 @@ public class Player : Entity
     }
 
     // 코루틴 함수.
-    private IEnumerator ComboAttackCoroutine()
+    private IEnumerator Co_ComboAttack()
     {
         yield return new WaitForEndOfFrame(); // 현재 프레임이 끝날 때까지 기다린다.
         stateMachine.ChangeState(AttackState);
@@ -69,10 +69,10 @@ public class Player : Entity
     // 컴포넌트(Monobehaviour 클래스)가 아니면 코루틴을 실행할 수 없기 때문에 래핑한다.
     public void ComboAttack()
     {
-        if (coroutine != null)
-            StopCoroutine(coroutine);
+        if (comboAttackCoroutine != null)
+            StopCoroutine(comboAttackCoroutine);
 
-        coroutine = StartCoroutine(ComboAttackCoroutine());
+        comboAttackCoroutine = StartCoroutine(Co_ComboAttack());
     }
 
     private void OnEnable()

@@ -13,6 +13,10 @@ public class StateMachine
     // 상태 머신의 현재 상태를 변경한다.
     public void ChangeState(BaseState newState)
     {
+        // 현재 상태가 Dead 상태라면 상태를 변경하지 않는다.
+        if (CurrentState is EnemyDeadState)
+            return;
+
         CurrentState.Exit(); // 변경 전 상태 종료.
         CurrentState = newState; // 상태 변경.
         CurrentState.Enter(); // 변경 후 상태 시작.

@@ -8389,7 +8389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityVFX
   onHitMaterial: {fileID: 2100000, guid: e4c099a4337ae874a9c311c8939e18f1, type: 2}
-  onHitDuration: 0.2
+  onHitDuration: 0.15
 --- !u!1 &1200376135
 GameObject:
   m_ObjectHideFlags: 0
@@ -15475,7 +15475,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  damage: 10
+  damage: 50
 --- !u!114 &2141094285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15503,7 +15503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityVFX
   onHitMaterial: {fileID: 2100000, guid: e4c099a4337ae874a9c311c8939e18f1, type: 2}
-  onHitDuration: 0.2
+  onHitDuration: 0.15
 --- !u!1 &2146425024
 GameObject:
   m_ObjectHideFlags: 0

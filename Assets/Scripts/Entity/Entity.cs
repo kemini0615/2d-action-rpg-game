@@ -61,6 +61,8 @@ public class Entity : MonoBehaviour
         FacingDirection = -FacingDirection;
     }
 
+    public virtual void EnterDeadState() {}
+
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundChecker.position, groundChecker.position + Vector3.down * distanceToGround);
